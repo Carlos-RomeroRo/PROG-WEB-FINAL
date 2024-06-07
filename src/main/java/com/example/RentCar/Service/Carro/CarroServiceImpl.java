@@ -9,7 +9,8 @@ import com.example.RentCar.Entities.Carro;
 import com.example.RentCar.Repositories.CarroRepository;
 import com.example.RentCar.dto.Carro.CarroDTO;
 import com.example.RentCar.dto.Carro.CarroMapper;
-
+// getall
+// getbyid
 import lombok.extern.slf4j.Slf4j;
 
 @Service

@@ -1,3 +1,4 @@
+-- SQLBook: Code
 -- tabla Usuario
 CREATE TABLE Usuario (
     id_usuario SERIAL PRIMARY KEY,
@@ -31,5 +32,7 @@ CREATE TABLE Prestamo (
     CONSTRAINT ck_fechas
         CHECK (fecha_inicio <= fecha_fin)
 );
+
+
 
 

@@ -1,3 +1,4 @@
+-- SQLBook: Code
 -- Insertar usuarios
 INSERT INTO Usuario (nombre, apellido, cedula, direccion, telefono) VALUES 
 ('Carlos', 'Gómez', 1011122233, 'Carrera 7 #45-10, Bogotá', 3214567890),

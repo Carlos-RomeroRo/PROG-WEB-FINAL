@@ -13,7 +13,8 @@ import com.example.RentCar.dto.Prestamo.PrestamoDTO;
 import com.example.RentCar.dto.Prestamo.PrestamoMapper;
 
 import lombok.extern.slf4j.Slf4j;
-
+// obtener prestamo por su id
+// relacione un usuario con un carro
 @Service
 @Slf4j
 public class PrestamoServiceImpl implements PrestamoService {
@@ -89,9 +90,14 @@ public class PrestamoServiceImpl implements PrestamoService {
 
     @Override
     public PrestamoDTO getPrestamoById(Long id) {
-        try{
-
-        }catch(Exception e){
+        try {
+            if (id == null) {
+                throw new IllegalArgumentException("Id cannot be null");
+            }
+            Prestamo prestamo = prestamoRepository.findById(id).orElseThrow(
+                    () -> new IllegalArgumentException("Prestamo no existente"));
+            return PrestamoMapper.INSTANCE.prestamoToPrestamoDTO(prestamo);
+        } catch (Exception e) {
             log.error("ERROR buscando el prestamo por el ID", e);
         }
         return null;
@@ -99,7 +105,12 @@ public class PrestamoServiceImpl implements PrestamoService {
 
     @Override
     public List<PrestamoDTO> getAllPrestamos() {
+        try {
+            List<Prestamo> prestamos = prestamoRepository.findAll();
+            return prestamos.stream().map(PrestamoMapper.INSTANCE::prestamoToPrestamoDTO).toList();
+        } catch (Exception e) {
+            log.error("ERROR buscando todos los prestamos", e);
+        }
         return null;
     }
-
 }

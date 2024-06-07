@@ -7,6 +7,5 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class RentCarApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(RentCarApplication.class, args);
-		System.out.println("\n\n---HOLA MUNDO!!---");
 	}
 }
