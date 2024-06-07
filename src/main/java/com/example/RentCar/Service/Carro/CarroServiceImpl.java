@@ -40,7 +40,7 @@ public class CarroServiceImpl implements CarroService {
     public CarroDTO updateCarro(Long id, CarroDTO carroDTO) {
         try {
             if (carroDTO.getId_carro() == null) {
-                throw new IllegalArgumentException("La identificación es generada por la base de datos");
+                throw new IllegalArgumentException("La identificación no puede ser NULL");
             }
             Carro carroFromBD = carroRepository.findById(id)
                     .orElseThrow(() -> new IllegalArgumentException("Carro no existente"));

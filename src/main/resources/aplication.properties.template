@@ -1,0 +1,8 @@
+spring.jpa.hibernate.ddl-auto=update
+spring.application.name=RentCar
+server.port=8080
+spring.datasource.driver-class-name=org.postgresql.Driver
+spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
+spring.datasource.url==jdbc:postgresql://your_postgres_host/your_postgres_database
+spring.datasource.username=your_user_for_postgres
+spring.datasource.password=your_password_for_postgres
