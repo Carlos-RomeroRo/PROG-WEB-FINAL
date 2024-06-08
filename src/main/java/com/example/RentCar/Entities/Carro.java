@@ -34,4 +34,7 @@ public class Carro {
 
     @Column(nullable = false)
     private String ciudad;
+
+    @Column(nullable = false)
+    private String imagen;
 }
