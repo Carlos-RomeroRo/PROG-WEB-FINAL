@@ -13,6 +13,7 @@ import com.example.RentCar.dto.Prestamo.PrestamoDTO;
 import com.example.RentCar.dto.Prestamo.PrestamoMapper;
 
 import lombok.extern.slf4j.Slf4j;
+
 // obtener prestamo por su id
 // relacione un usuario con un carro
 @Service
@@ -33,7 +34,6 @@ public class PrestamoServiceImpl implements PrestamoService {
             if (prestamoDTO.getId_prestamo() != null) {
                 throw new IllegalArgumentException("La identificación es generada por la base de datos");
             }
-
             Prestamo prestamo = PrestamoMapper.INSTANCE.prestamoDTOToPrestamo(prestamoDTO, usuarioRepository,
                     carroRepository);
             if (prestamo == null) {
@@ -45,47 +45,6 @@ public class PrestamoServiceImpl implements PrestamoService {
             log.error("ERROR creando el prestamo", e);
         }
         return null;
-    }
-
-    @Override
-    public PrestamoDTO updatePrestamo(Long id, PrestamoDTO prestamoDTO) {
-        try {
-            if (prestamoDTO.getId_prestamo() == null) {
-                throw new IllegalArgumentException("La identificación es generada por la base de datos");
-            }
-
-            Prestamo prestamoFromBD = prestamoRepository.findById(id).orElseThrow(
-                    () -> new IllegalArgumentException("Prestamo no existente"));
-
-            if (prestamoFromBD.getFechaFin() != prestamoDTO.getFechaFin() && prestamoDTO.getFechaFin() != null) {
-                prestamoFromBD.setFechaFin(prestamoDTO.getFechaFin());
-            }
-            if (prestamoFromBD.getFechaInicio() != prestamoDTO.getFechaInicio()
-                    && prestamoDTO.getFechaInicio() != null) {
-                prestamoFromBD.setFechaInicio(prestamoDTO.getFechaInicio());
-            }
-            Prestamo prestamoSave = prestamoRepository.save(prestamoFromBD);
-            return PrestamoMapper.INSTANCE.prestamoToPrestamoDTO(prestamoSave);
-
-        } catch (Exception e) {
-            log.error("ERROR actualizando el prestamo", e);
-        }
-
-        return null;
-    }
-
-    @Override
-    public Boolean deletePrestamo(Long id) {
-        try {
-            if (id == null) {
-                throw new IllegalArgumentException("Id cannot be null");
-            }
-            prestamoRepository.deleteById(id);
-            return true;
-        } catch (Exception e) {
-            log.error("ERROR borrando el prestamo por el ID", e);
-        }
-        return false;
     }
 
     @Override
@@ -111,6 +70,6 @@ public class PrestamoServiceImpl implements PrestamoService {
         } catch (Exception e) {
             log.error("ERROR buscando todos los prestamos", e);
         }
-        return null;
+        return List.of();
     }
 }
