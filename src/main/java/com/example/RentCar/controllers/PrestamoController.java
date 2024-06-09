@@ -24,7 +24,7 @@ public class PrestamoController {
     @Autowired
     private PrestamoServiceImpl prestamoServiceImpl;
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<HashMap<String, Object>> getAllPrestamos() {
         HashMap<String, Object> response = new HashMap<>();
 
