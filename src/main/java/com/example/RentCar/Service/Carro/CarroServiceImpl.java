@@ -1,6 +1,7 @@
 package com.example.RentCar.Service.Carro;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,7 @@ import com.example.RentCar.Entities.Carro;
 import com.example.RentCar.Repositories.CarroRepository;
 import com.example.RentCar.dto.Carro.CarroDTO;
 import com.example.RentCar.dto.Carro.CarroMapper;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Service
@@ -44,17 +46,20 @@ public class CarroServiceImpl implements CarroService {
             Carro carroFromBD = carroRepository.findById(id)
                     .orElseThrow(() -> new IllegalArgumentException("Carro no existente"));
 
-            if (carroFromBD.getCiudad().equals(carroDTO.getCiudad()) && carroDTO.getCiudad() != null) {
-                carroFromBD.setCiudad(carroFromBD.getCiudad());
+            if (!carroFromBD.getCiudad().equals(carroDTO.getCiudad()) && carroDTO.getCiudad() != null) {
+                carroFromBD.setCiudad(carroDTO.getCiudad());
             }
-            if (carroFromBD.getColor().equals(carroDTO.getColor()) && carroDTO.getColor() != null) {
-                carroFromBD.setColor(carroFromBD.getColor());
+            if (!carroFromBD.getColor().equals(carroDTO.getColor()) && carroDTO.getColor() != null) {
+                carroFromBD.setColor(carroDTO.getColor());
             }
-            if (carroFromBD.getMarca().equals(carroDTO.getMarca()) && carroDTO.getMarca() != null) {
-                carroFromBD.setMarca(carroFromBD.getCiudad());
+            if (!carroFromBD.getMarca().equals(carroDTO.getMarca()) && carroDTO.getMarca() != null) {
+                carroFromBD.setMarca(carroDTO.getMarca());
             }
-            if (carroFromBD.getModelo().equals(carroDTO.getModelo()) && carroDTO.getModelo() != null) {
-                carroFromBD.setModelo(carroFromBD.getCiudad());
+            if (!carroFromBD.getModelo().equals(carroDTO.getModelo()) && carroDTO.getModelo() != null) {
+                carroFromBD.setModelo(carroFromBD.getModelo());
+            }
+            if (!Objects.equals(carroFromBD.getPrecio(), carroDTO.getPrecio()) && carroDTO.getPrecio() != null) {
+                carroFromBD.setPrecio(carroDTO.getPrecio());
             }
             Carro carroSave = carroRepository.save(carroFromBD);
             return CarroMapper.INSTANCE.carroToCarroDTO(carroSave);

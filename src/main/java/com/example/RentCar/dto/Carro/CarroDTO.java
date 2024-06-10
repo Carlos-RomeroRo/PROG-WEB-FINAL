@@ -11,4 +11,5 @@ public class CarroDTO {
     private String color;
     private String ciudad;
     private String imagen;
+    private Double precio;
 }

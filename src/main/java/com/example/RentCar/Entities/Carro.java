@@ -20,7 +20,7 @@ import lombok.Setter;
 
 public class Carro {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_carro;
 
     @Column(nullable = false)
@@ -35,6 +35,11 @@ public class Carro {
     @Column(nullable = false)
     private String ciudad;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String imagen;
+
+    @Column(nullable = false)
+    private Double precio;
+
+
 }

@@ -23,7 +23,7 @@ import lombok.Setter;
 @Setter
 public class Prestamo {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_prestamo;
 
     @ManyToOne
