@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.RentCar.Service.Usuario.UsuarioServiceImpl;
 import com.example.RentCar.dto.Usuario.UsuarioDTO;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @RequestMapping("/api/v1/users")
@@ -28,12 +30,21 @@ public class UsuarioController {
         UsuarioDTO userCreated = usuarioServiceImpl.CreateUsuario(newUser);
 
         if (userCreated == null) {
-            response.put("error", "There was an error creating the user");
             return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
         }
 
         response.put("success", userCreated);
 
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<HashMap<String, Object>> getuserById(@PathVariable("id") Long id) {
+        HashMap<String, Object> response = new HashMap<>();
+        UsuarioDTO user = usuarioServiceImpl.GetUsuarioById(id);
+        if (user == null) {
+            return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
+        }
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

@@ -6,4 +6,5 @@ import com.example.RentCar.dto.Usuario.UsuarioDTO;
 public interface UsuarioService {
     // CRUD
     public UsuarioDTO CreateUsuario(UsuarioDTO usuarioDTO);
+    public UsuarioDTO GetUsuarioById(Long id);
 }

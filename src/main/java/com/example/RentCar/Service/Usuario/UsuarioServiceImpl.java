@@ -33,5 +33,19 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
         return null;
     }
+
+    @Override
+    public UsuarioDTO GetUsuarioById(Long id) {
+        try {
+            if (id == null) {
+                throw new IllegalArgumentException("Id NO puede ser NULL");
+            }
+            Usuario usuario = usuarioRepository.findById(id).orElse(null);
+            return UsuarioMapper.INSTANCE.usuarioToUsuarioDTO(usuario);
+        } catch (Exception e) {
+            log.error("ERROR obteniendo el usuario por el ID", e);
+        }
+        return null;
+    }
     
 }

@@ -19,7 +19,7 @@ CREATE TABLE
         color VARCHAR(20) NOT NULL,
         ciudad VARCHAR(50) NOT NULL,
         imagen TEXT NOT NULL,
-        precio NUMERIC(10,2) NOT NULL
+        precio DECIMAL(10,2) NOT NULL
     );
 
 -- tabla de prestamos
