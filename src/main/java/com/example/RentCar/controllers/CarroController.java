@@ -26,8 +26,7 @@ public class CarroController {
         HashMap<String, Object> response = new HashMap<>();
         List<CarroDTO> carros = carroServiceImpl.getAllCarros();
 
-        if (carros.size() == 0) {
-            response.put("error", "There are not cars");
+        if (carros.isEmpty()) {
             return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
         }
 

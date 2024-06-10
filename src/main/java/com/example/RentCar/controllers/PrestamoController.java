@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
 
 import com.example.RentCar.Service.Prestamo.PrestamoServiceImpl;
 import com.example.RentCar.dto.Prestamo.PrestamoDTO;
@@ -23,13 +24,24 @@ public class PrestamoController {
     @Autowired
     private PrestamoServiceImpl prestamoServiceImpl;
 
+    @GetMapping("")
+    public ResponseEntity<HashMap<String, Object>> getAllPrestamos() {
+        HashMap<String, Object> response = new HashMap<>();
+
+        List<PrestamoDTO> prestamos = prestamoServiceImpl.getAllPrestamos();
+        if (prestamos.isEmpty()) {
+            return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
+        }
+        response.put("prestamos", prestamos);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<HashMap<String, Object>> getPrestamoById(@PathVariable("id") Long id) {
         HashMap<String, Object> response = new HashMap<>();
 
         PrestamoDTO prestamos = prestamoServiceImpl.getPrestamoById(id);
         if (prestamos == null) {
-            response.put("error", "There was an error getting the prestamo");
             return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
         }
         response.put("prestamo", prestamos);
@@ -44,7 +56,6 @@ public class PrestamoController {
         PrestamoDTO prestamos = prestamoServiceImpl.CreatePrestamo(newPrestamo);
 
         if (prestamos == null) {
-            response.put("error", "There was an error creating the prestamo");
             return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
         }
         response.put("success", prestamos);
