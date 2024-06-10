@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "Usuario")
@@ -17,9 +18,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @Setter
 @Getter
+@ToString
 public class Usuario {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_usuario;
 
     @Column(nullable = false)

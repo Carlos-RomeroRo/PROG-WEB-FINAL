@@ -12,6 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "Carro")
@@ -19,10 +20,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-
+@ToString
 public class Carro {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_carro;
 
     @Column(nullable = false)
