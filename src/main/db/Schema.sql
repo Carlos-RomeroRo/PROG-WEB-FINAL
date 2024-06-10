@@ -30,7 +30,7 @@ CREATE TABLE
         carro_id INT NOT NULL,
         fecha_inicio DATE NOT NULL,
         fecha_fin DATE NOT NULL,
-        CONSTRAINT fk_usuario FOREIGN KEY (usuario_id) REFERENCES Usuario (id),
-        CONSTRAINT fk_carro FOREIGN KEY (carro_id) REFERENCES Carro (id),
+        CONSTRAINT fk_usuario FOREIGN KEY (usuario_id) REFERENCES Usuario (id_usuario),
+        CONSTRAINT fk_carro FOREIGN KEY (carro_id) REFERENCES Carro (id_carro),
         CONSTRAINT ck_fechas CHECK (fecha_inicio <= fecha_fin)
     );
