@@ -37,51 +37,6 @@ public class CarroServiceImpl implements CarroService {
         return null;
     }
 
-    @Override
-    public CarroDTO updateCarro(Long id, CarroDTO carroDTO) {
-        try {
-            if (carroDTO.getId_carro() == null) {
-                throw new IllegalArgumentException("La identificación no puede ser NULL");
-            }
-            Carro carroFromBD = carroRepository.findById(id)
-                    .orElseThrow(() -> new IllegalArgumentException("Carro no existente"));
-
-            if (!carroFromBD.getCiudad().equals(carroDTO.getCiudad()) && carroDTO.getCiudad() != null) {
-                carroFromBD.setCiudad(carroDTO.getCiudad());
-            }
-            if (!carroFromBD.getColor().equals(carroDTO.getColor()) && carroDTO.getColor() != null) {
-                carroFromBD.setColor(carroDTO.getColor());
-            }
-            if (!carroFromBD.getMarca().equals(carroDTO.getMarca()) && carroDTO.getMarca() != null) {
-                carroFromBD.setMarca(carroDTO.getMarca());
-            }
-            if (!carroFromBD.getModelo().equals(carroDTO.getModelo()) && carroDTO.getModelo() != null) {
-                carroFromBD.setModelo(carroFromBD.getModelo());
-            }
-            if (!Objects.equals(carroFromBD.getPrecio(), carroDTO.getPrecio()) && carroDTO.getPrecio() != null) {
-                carroFromBD.setPrecio(carroDTO.getPrecio());
-            }
-            Carro carroSave = carroRepository.save(carroFromBD);
-            return CarroMapper.INSTANCE.carroToCarroDTO(carroSave);
-        } catch (Exception e) {
-            log.error("ERROR actualizando el carro", e);
-        }
-        return null;
-    }
-
-    @Override
-    public boolean deleteCarro(Long id) {
-        try {
-            if (id == null) {
-                throw new IllegalArgumentException("Id cannot be null");
-            }
-            carroRepository.deleteById(id);
-            return true;
-        } catch (Exception e) {
-            log.error("ERROR borrando el carro por el ID", e);
-        }
-        return false;
-    }
 
     @Override
     public CarroDTO getCarroById(Long id) {

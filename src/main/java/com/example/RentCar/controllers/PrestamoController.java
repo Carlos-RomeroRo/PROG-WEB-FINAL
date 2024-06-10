@@ -13,8 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
+import com.example.RentCar.Service.Carro.CarroServiceImpl;
 import com.example.RentCar.Service.Prestamo.PrestamoServiceImpl;
+import com.example.RentCar.Service.Usuario.UsuarioServiceImpl;
+import com.example.RentCar.dto.Carro.CarroDTO;
 import com.example.RentCar.dto.Prestamo.PrestamoDTO;
+import com.example.RentCar.dto.Usuario.UsuarioDTO;
 
 @RestController
 @RequestMapping("/api/v1/prestamos")
@@ -23,6 +27,10 @@ public class PrestamoController {
 
     @Autowired
     private PrestamoServiceImpl prestamoServiceImpl;
+    @Autowired
+    private CarroServiceImpl carroServiceImpl;
+    @Autowired
+    private UsuarioServiceImpl usuarioServiceImpl;
 
     @GetMapping("")
     public ResponseEntity<HashMap<String, Object>> getAllPrestamos() {
@@ -44,7 +52,17 @@ public class PrestamoController {
         if (prestamos == null) {
             return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
         }
+        UsuarioDTO usuario = usuarioServiceImpl.GetUsuarioById(prestamos.getUsuario_id());
+        if (usuario == null) {
+            return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
+        }
+        CarroDTO carro = carroServiceImpl.getCarroById(prestamos.getCarro_id());
+        if (carro == null) {
+            return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
+        }
         response.put("prestamo", prestamos);
+        response.put("usuario", usuario);
+        response.put("carro", carro);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

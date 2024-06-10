@@ -38,13 +38,14 @@ public class UsuarioController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<HashMap<String, Object>> getuserById(@PathVariable("id") Long id) {
+    @GetMapping("/{document}")
+    public ResponseEntity<HashMap<String, Object>> getuserByCedula(@PathVariable("document") Long document) {
         HashMap<String, Object> response = new HashMap<>();
-        UsuarioDTO user = usuarioServiceImpl.GetUsuarioById(id);
+        UsuarioDTO user = usuarioServiceImpl.GetUsuarioByCedula(document);
         if (user == null) {
             return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
         }
+        response.put("user-found", user);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

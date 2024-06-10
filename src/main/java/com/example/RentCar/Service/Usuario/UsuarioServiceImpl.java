@@ -48,4 +48,18 @@ public class UsuarioServiceImpl implements UsuarioService {
         return null;
     }
     
+    @Override
+    public UsuarioDTO GetUsuarioByCedula(Long document) {
+        try {
+            if (document == null) {
+                throw new IllegalArgumentException("El documento NO puede ser NULL");
+            }
+            Usuario usuario = usuarioRepository.findByCedula(document).orElse(null);
+            return UsuarioMapper.INSTANCE.usuarioToUsuarioDTO(usuario);
+        } catch (Exception e) {
+            log.error("ERROR obteniendo el usuario por el documento", e);
+        }
+        return null;
+    }
+    
 }
